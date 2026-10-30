@@ -16,7 +16,7 @@
 6. 所有用户资源访问均校验归属。
 
 ## 建议技术栈
-- Frontend：React、TypeScript、Vite、Tailwind CSS、shadcn/ui、Motion、GSAP、Zustand。
+- Frontend：React、TypeScript、Vite、Tailwind CSS、shadcn/ui；Motion 默认、GSAP 仅复杂时间轴按需使用；TanStack Query 管服务端数据，Zustand 仅必要客户端共享状态。具体边界与设计系统接入见[前端架构](frontend-architecture.md)。
 - Backend：Python、FastAPI、Pydantic、SQLAlchemy。
 - Database：PostgreSQL。
 - Storage：腾讯云 COS / S3-compatible object storage。
