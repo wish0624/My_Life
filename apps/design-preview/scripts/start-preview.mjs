@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const url = 'http://127.0.0.1:4173/design-preview?direction=a';
+const url = 'http://127.0.0.1:4173' + (process.argv.includes('--core') ? '/design-preview/core' : '/design-preview');
 const logPath = path.join(root, '.qa', 'preview-server.log');
 
 async function probe() {

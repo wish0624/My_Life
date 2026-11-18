@@ -15,9 +15,9 @@ async function check(name, fn) { await fn(); results.push(name); console.log('PA
 async function noOverflow() { const d = await page.evaluate(() => ({v:innerWidth,s:document.documentElement.scrollWidth})); assert.ok(d.s <= d.v+1,JSON.stringify(d)); }
 async function closeDialog() { await page.keyboard.press('Escape'); await page.locator('dialog').waitFor({state:'detached'}); }
 try {
-  await check('Dedicated route and formal-home boundary', async () => {
+  await check('Default ignition screen and dedicated A route', async () => {
     assert.equal((await page.goto(base+'/'))?.status(),200);
-    assert.equal(await page.getByRole('heading',{name:/留一点空间/}).count(),1);
+    await page.getByRole('heading',{name:'光启核心'}).waitFor();
     assert.equal((await page.goto(base+'/design-preview?direction=a',{waitUntil:'networkidle'}))?.status(),200);
     assert.equal(await page.locator('h1').count(),1);
   });
@@ -119,7 +119,7 @@ try {
   await check('Mobile touch, menu, landscape, short viewport and text enlargement', async () => {
     const touchContext=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});
     const touch=await touchContext.newPage();
-    await touch.goto(base+'/design-preview');
+    await touch.goto(base+'/design-preview?direction=a');
     assert.ok(await touch.evaluate(()=>matchMedia('(pointer:coarse)').matches));
     await touch.getByRole('button',{name:'打开移动菜单'}).tap();
     assert.ok(await touch.locator('dialog').isVisible());
